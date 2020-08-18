@@ -1,0 +1,17 @@
+{
+  "name": "tu-diploma",
+  "version": "0.0.0",
+  "description": "Diploma project for TU-Sofia",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Georgi Ivanov",
+  "license": "ISC",
+  "dependencies": {
+    "node-media-server": "^2.2.2",
+    "pg": "^8.3.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.4"
+  }
+}
