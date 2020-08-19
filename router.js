@@ -5,7 +5,7 @@ let port = 8080;
 
 
 
-const index = require("./routes/index");
+const index = require("./controllers/index");
 
 app.use('/', index);
 
