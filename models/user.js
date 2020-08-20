@@ -1,41 +1,43 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require("../config/sequelize");
+module.exports = (sequelize, DataTypes) => {
 
-const User = sequelize.define('User', {
-	// Model attributes are defined here
-	userName: {
-		type: DataTypes.STRING,
-		allowNull: false,
-    	unique: true
-	},
-	email: {
-		type: DataTypes.STRING,
-		allowNull: false,
-    	unique: true
-	},
-	password: {
-		type: DataTypes.STRING,
-		allowNull: false,
-	},
-	salt:{
-		type: DataTypes.STRING,
-		allowNull: false,
-    	unique: true
-	},
-	streamKey:{
-		type: DataTypes.STRING,
-		allowNull: false,
-    	unique: true
+	const User = sequelize.define('User', {
+		// Model attributes are defined here
+		userName: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			unique: true
+		},
+		email: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			unique: true
+		},
+		password: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+		salt: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			unique: true
+		},
+		streamKey: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			unique: true
+		}
+	}, {
+		// Other model options go here
+	});
+
+	User.associate = models => {
+		User.hasMany(models.Stream);
 	}
-}, {
-	// Other model options go here
-});
 
+	User.Test = function(){return "Asd"}
+	User.prototype.getName = function(){
+		return this.userName;
+	}
 
-// `sequelize.define` also returns the model
-console.log(User === sequelize.models.User); // true
-
-//const jane = User.build({ firstName: "Jane", lastName: "Asd" });
-//jane.save();
-
-module.exports = User; 
+	return User
+}
