@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const db = require("../models/");
 
-router.get('/', (req, res) => {
-	res.send(db.User.findAll());
+router.get('/', async (req, res) => {
+	res.send(await db.User.findAll());
 });
 
 module.exports = router;
