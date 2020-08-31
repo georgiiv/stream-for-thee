@@ -12,6 +12,7 @@
     "node-media-server": "^2.2.2",
     "pg": "^8.3.0",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^6.3.4"
+    "sequelize": "^6.3.4",
+    "serve-static": "^1.14.1"
   }
 }

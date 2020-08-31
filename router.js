@@ -1,16 +1,21 @@
 const express = require('express')
+var serveStatic = require('serve-static')
 const app = express();
 
 let port = 8080;
 
 
 
-const index = require("./controllers/index");
-
-app.use('/', index);
+const users = require("./controllers/users");
 
 
 
+app.use('/api/users', users);
+
+
+
+app.use('/', serveStatic('./public/client/'))
+app.use(serveStatic('./public'))
 
 app.run = () => {
 	app.listen(port, function () {
