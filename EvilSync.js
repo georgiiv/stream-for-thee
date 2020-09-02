@@ -3,28 +3,14 @@ const db = require("./models")
 db.sequelize.sync({force: true})
 .then(() => {
 	console.log('Database connected...')
-
-	db.User.bulkCreate([
-		{
-			userName: "pesho",
-			email: "pesho@pesho",
-			password: "1234",
-			streamKey: "1234",
-		},
-		{
-			userName: "anton",
-			email: "anton@anton",
-			password: "1234",
-			streamKey: "12345",
-		}
-	]).then(()=>{
-		testSelect();
-	})
-	
+	test();	
 })
 .catch(err => console.log('Error: ' + err));
 
-async function testSelect(){
+async function test(){
+	await db.User.createUser("pesho", "pesho@pesho", "1234");
+	await db.User.createUser("atanas", "asd@asd", "1234");
+
 	var res = await db.User.findOne({where: {email: "pesho@pesho"}})
 	var res2 = await db.User.findByStreamKey("1234");
 	console.log(res.userName)

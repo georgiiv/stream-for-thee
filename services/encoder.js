@@ -2,11 +2,15 @@ const ffmpeg = require("fluent-ffmpeg");
 const fs = require('fs');
 const util = require('util');
 
+const db = require("../models");
+
 const mkdir = util.promisify(fs.mkdir);
 const ffprobe = util.promisify(ffmpeg.ffprobe);
 
 class Encoder {
 	static #streams;
+
+	//{streamer, streampath}
 
 	static async getResolution(source){
 		let data = await ffprobe(source);
@@ -16,30 +20,14 @@ class Encoder {
 		}
 	}
 
-	// static getResolution(source) {
-	// 	return new Promise((resolve, reject) => {
-	// 		return ffmpeg.ffprobe(source, (error, videoInfo) => {
-	// 			if (error) {
-	// 				return reject(error);
-	// 			}
-
-	// 			let width = videoInfo.streams[2].coded_width;
-	// 			let height = videoInfo.streams[2].coded_height;
-
-	// 			return resolve({
-	// 				width,
-	// 				height
-	// 			});
-	// 		});
-	// 	});
-	// }
-
-	static async startRemux(source, destinationFolder) {
+	static async startRemux(source, user) {
 		var command = ffmpeg(source)
 			.on('end', function () {
-				console.log('Processing finished !');
+				console.log('Remux finished !');
 			})
 			.outputOptions([
+				'-c:v copy',
+				'-c:a copy',
 				'-f hls',
 				'-hls_time 6'
 			]);
@@ -48,18 +36,17 @@ class Encoder {
 		command.save(destinationFolder + "stream.m3u8");
 	}
 
-	// ffmpeg -i rtmp://localhost/live/1234 \
-	// -c:v copy \
-	// -c:a copy \
-	// -f hls -hls_time 6 stream.m3u8
+	static async startEncode(source, user) {
+		let stream = await db.Stream.createStream(user);
 
-	static async startEncode(source, destinationFolder) {
+		let destinationFolder = "./public/streams/" + stream.streamPath;
+
 		await mkdir(destinationFolder);
 		process.chdir(destinationFolder);
 
 		var command = ffmpeg(source)
 			.on('end', function () {
-				console.log('Processing finished !');
+				console.log('Reencode finished !');
 			})
 			.addOption('-filter_complex', '[v:0]split=2[vtemp001][vout002];[vtemp001]scale=w=960:h=540[vout001]')
 			.outputOptions([
@@ -88,6 +75,9 @@ class Encoder {
 			]).outputOption('-var_stream_map', 'v:0,a:0 v:1,a:1')
 		
 		command.save('stream_%v.m3u8');
+
+		process.chdir("../../../");
+		console.log(process.cwd())
 	}
 
 	getStreams() { return this.streams }

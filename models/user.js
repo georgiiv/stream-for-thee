@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 
 module.exports = (sequelize, DataTypes) => {
-
 	const User = sequelize.define('User', {
 		// Model attributes are defined here
 		userName: {
@@ -28,7 +27,11 @@ module.exports = (sequelize, DataTypes) => {
 	});
 
 	User.associate = models => {
-		User.hasMany(models.Stream);
+		User.hasMany(models.Stream, {
+			foreignKey: {
+				name: 'userId'
+			}
+		});
 	}
 
 	User.Test = function(){return "Asd"}
@@ -46,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
 		return User.findOne({where: {email: email}});
 	}
 
-	User.createUser = async function(username, email, password, repeatPassword){
+	User.createUser = async function(username, email, password){
 		user = await User.build({
 			userName: username, 
 			email: email, 

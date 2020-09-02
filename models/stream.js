@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
 		streamName: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			unique: true
 		},
 		streamPath: {
 			type: DataTypes.STRING,
@@ -18,9 +17,24 @@ module.exports = (sequelize, DataTypes) => {
 	Stream.associate = models => {
 		Stream.belongsTo(models.User, {
 			foreignKey: {
+				name: 'userId',
 				allowNull: false
 			}
 		});
+	}
+
+	Stream.createStream = async function(user){
+		try{
+			stream = await Stream.build({
+			streamName: "Untitled",
+			streamPath: user.userName + "_" + require("crypto").randomBytes(10).toString('hex') + "/",
+			userId: user.id
+		}).save();;
+		}catch(error){
+			console.log(error);
+		}
+
+		return stream;
 	}
 
 	return Stream;

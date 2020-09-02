@@ -1,5 +1,6 @@
 const NodeMediaServer = require('node-media-server');
 const Encoder = require("./services/encoder");
+const db = require("./models");
 
 const config = {
 	rtmp: {
@@ -19,22 +20,25 @@ const getStreamKeyFromStreamPath = (path) => {
 };
 
 nms.on('prePublish', (id, StreamPath, args) => {
-	console.log('[NodeEvent on prePublish]', `id=${id} StreamPath=${StreamPath} args=${JSON.stringify(args)}`);
-
+	//console.log('[NodeEvent on prePublish]', `id=${id} StreamPath=${StreamPath} args=${JSON.stringify(args)}`);
+	
 	let session = nms.getSession(id);
-	let stream_key = getStreamKeyFromStreamPath(StreamPath);
+	let streamKey = getStreamKeyFromStreamPath(StreamPath);
 
-	Encoder.startEncode("rtmp://localhost/"+StreamPath, "./public/streams/pesho/");
-
-	//console.log(stream_key);
-	//console.log("rtmp://localhost/"+StreamPath);
-	if (stream_key != "1234") {
-		session.reject();
-	}
+	db.User.findOne({where: {streamKey: streamKey}}).then(function(user) {
+		if(user){
+			console.log("Starting Encoder");
+			Encoder.startEncode("rtmp://localhost:55456/"+StreamPath, user);
+		}else{
+			console.log("Bug here. session.reject() is borked and OBS constantly tries to reconnect", "id", session.publishStreamId);
+			session.sendStatusMessage(session.publishStreamId, "error", "NetStream.publish.Unauthorized", "Authorization required.");
+			session.reject();
+		}
+	});
 });
 
-nms.on('postPublish', (id, StreamPath, args) => {
-	console.log('[NodeEvent on postPublish]', `id=${id} StreamPath=${StreamPath} args=${JSON.stringify(args)}`);
-});
+// nms.on('postPublish', (id, StreamPath, args) => {
+// 	console.log('[NodeEvent on postPublish]', `id=${id} StreamPath=${StreamPath} args=${JSON.stringify(args)}`);
+// });
 
 module.exports = nms;
