@@ -1,4 +1,5 @@
 const NodeMediaServer = require('node-media-server');
+const Encoder = require("./services/encoder");
 
 const config = {
 	rtmp: {
@@ -23,7 +24,10 @@ nms.on('prePublish', (id, StreamPath, args) => {
 	let session = nms.getSession(id);
 	let stream_key = getStreamKeyFromStreamPath(StreamPath);
 
-	console.log(stream_key);
+	Encoder.startEncode("rtmp://localhost/"+StreamPath, "./public/streams/pesho/");
+
+	//console.log(stream_key);
+	//console.log("rtmp://localhost/"+StreamPath);
 	if (stream_key != "1234") {
 		session.reject();
 	}

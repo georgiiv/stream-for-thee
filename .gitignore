@@ -1,3 +1,6 @@
 node_modules
+sessions
+public/streams
+public/emoticons
 
-request.rest
+*.rest

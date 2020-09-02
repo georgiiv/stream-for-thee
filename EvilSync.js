@@ -10,7 +10,7 @@ db.sequelize.sync({force: true})
 			email: "pesho@pesho",
 			password: "1234",
 			salt: "asd",
-			streamKey: "qwerty",
+			streamKey: "1234",
 		},
 		{
 			userName: "anton",
@@ -28,8 +28,10 @@ db.sequelize.sync({force: true})
 
 async function testSelect(){
 	var res = await db.User.findOne({where: {email: "pesho@pesho"}})
+	var res2 = await db.User.findByStreamKey("1234");
 	console.log(res.userName)
 	console.log(res.get("userName"))
 	console.log(res.getDataValue("userName"))
 	console.log(res.getName())
+	console.log(res.userName, "maybe");
 }

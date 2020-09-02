@@ -39,5 +39,9 @@ module.exports = (sequelize, DataTypes) => {
 		return this.userName;
 	}
 
+	User.findByStreamKey = async function(streamKey){
+		return User.findAll({where: {streamKey: streamKey}});
+	}
+
 	return User
 }
