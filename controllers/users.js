@@ -3,7 +3,7 @@ const passport = require("passport");
 const db = require("../models/");
 
 router.get('/', async (req, res) => {
-	res.send(await db.User.findAll());
+	res.send(req.user);
 });
 
 router.post('/', async (req, res) => {

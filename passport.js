@@ -6,14 +6,14 @@ function initialise(passport) {
 	console.log("Passport initialised")
 
 	const authenticateUser = async (username, password, done) => {
-		let User;
-		if (User = await db.User.findOne({ where: { userName: username } })) {
-			bcrypt.compare(password, User.password, (err, isMatch) => {
+		let user;
+		if (user = await db.User.findOne({ where: { userName: username } })) {
+			bcrypt.compare(password, user.password, (err, isMatch) => {
 				if (err) {
 					console.log(err);
 				}
 				if (isMatch) {
-					return done(null, User);
+					return done(null, user);
 				} else {
 					return done(null, false, { message: "Password is incorrect" });
 				}
@@ -30,8 +30,8 @@ function initialise(passport) {
 	});
 
 	passport.deserializeUser(async (id, done) => {
-		await db.User.findOne({ where: { id: id } });
-		return done(null, db.User);
+		let user = await db.User.findOne({ where: { id: id } });
+		return done(null, user);
 	})
 }
 
