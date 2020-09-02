@@ -54,24 +54,40 @@ class Encoder {
 	// -f hls -hls_time 6 stream.m3u8
 
 	static async startEncode(source, destinationFolder) {
+		await mkdir(destinationFolder);
+		process.chdir(destinationFolder);
 
 		var command = ffmpeg(source)
 			.on('end', function () {
 				console.log('Processing finished !');
 			})
+			.addOption('-filter_complex', '[v:0]split=2[vtemp001][vout002];[vtemp001]scale=w=960:h=540[vout001]')
 			.outputOptions([
+				'-preset veryfast',
+				'-g 25',
+				'-sc_threshold 0',
+				'-map [vout001]',
+				'-c:v:0 libx264',
+				'-b:v:0 2000k',
+				'-map [vout002]',
+				'-c:v:1 libx264',
+				'-b:v:1 6000k',
+				'-map a:0',
+				'-map a:0',
+				'-c:a aac',
+				'-b:a 128k',
+				'-ac 2',
 				'-f hls',
-				'-hls_time 6'
-			]);
-
-		console.log(await this.getResolution(source));
-		console.log("plsssssss", await this.getRes(source));
-
-		// command.clone()
-		// 	.size('640x400')
-		// 	.save('./public/streams/stream.mp4');
-		//await mkdir(destinationFolder);
-		//command.save(destinationFolder + "stream.m3u8");
+				'-hls_time 4',
+				'-hls_playlist_type event',
+				'-hls_flags',
+				'independent_segments',
+				'-master_pl_name master.m3u8',
+				'-hls_segment_filename stream_%v/data%06d.ts',
+				'-use_localtime_mkdir 1'
+			]).outputOption('-var_stream_map', 'v:0,a:0 v:1,a:1')
+		
+		command.save('stream_%v.m3u8');
 	}
 
 	getStreams() { return this.streams }
