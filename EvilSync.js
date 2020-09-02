@@ -9,14 +9,12 @@ db.sequelize.sync({force: true})
 			userName: "pesho",
 			email: "pesho@pesho",
 			password: "1234",
-			salt: "asd",
 			streamKey: "1234",
 		},
 		{
 			userName: "anton",
 			email: "anton@anton",
 			password: "1234",
-			salt: "dsa",
 			streamKey: "12345",
 		}
 	]).then(()=>{
