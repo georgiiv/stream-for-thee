@@ -24,7 +24,7 @@ nms.on('prePublish', (id, StreamPath, args) => {
 	let session = nms.getSession(id);
 	let stream_key = getStreamKeyFromStreamPath(StreamPath);
 
-	Encoder.startEncode("rtmp://localhost/"+StreamPath, "./public/streams/pesho/");
+	//Encoder.startEncode("rtmp://localhost/"+StreamPath, "./public/streams/pesho/");
 
 	//console.log(stream_key);
 	//console.log("rtmp://localhost/"+StreamPath);
