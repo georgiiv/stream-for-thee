@@ -37,22 +37,24 @@ module.exports = (sequelize, DataTypes) => {
 	}
 
 	User.findByStreamKey = async function(streamKey){
-		return User.findAll({where: {streamKey: streamKey}});
+		return User.findOne({where: {streamKey: streamKey}});
+	}
+	User.findByUsername = async function(username){
+		return User.findOne({where: {userName: username}});
+	}
+	User.findByEmail = async function(email){
+		return User.findOne({where: {email: email}});
 	}
 
 	User.createUser = async function(username, email, password, repeatPassword){
-		if(password != repeatPassword){
-			throw new Error("Passwords don't match");
-		}
-
-		res = await User.build({
+		user = await User.build({
 			userName: username, 
 			email: email, 
 			password: await bcrypt.hash(password, 10),
 			streamKey: require("crypto").randomBytes(20).toString('hex')
 		}).save();
 
-		return res;
+		return user;
 	}
 	
 	return User
