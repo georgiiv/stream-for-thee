@@ -45,8 +45,15 @@ class Encoder {
 		process.chdir(destinationFolder);
 
 		var command = ffmpeg(source)
+			.on('start', function(ffmpegCommand) {
+				process.chdir("../../../");
+				console.log(ffmpegCommand)
+			})
 			.on('end', function () {
 				console.log('Reencode finished !');
+			})
+			.on('error', function(err, stdout, stderr){
+				console.log('Cannot process video: ' + err.message);
 			})
 			.addOption('-filter_complex', '[v:0]split=2[vtemp001][vout002];[vtemp001]scale=w=960:h=540[vout001]')
 			.outputOptions([
@@ -69,15 +76,14 @@ class Encoder {
 				'-hls_playlist_type event',
 				'-hls_flags',
 				'independent_segments',
+				'-strftime_mkdir 1',
 				'-master_pl_name master.m3u8',
-				'-hls_segment_filename stream_%v/data%06d.ts',
-				'-use_localtime_mkdir 1'
-			]).outputOption('-var_stream_map', 'v:0,a:0 v:1,a:1')
-		
+				'-hls_segment_filename stream_%v/data%06d.ts'
+			]).outputOption('-var_stream_map', 'v:0,a:0 v:1,a:1');		
 		command.save('stream_%v.m3u8');
 
-		process.chdir("../../../");
-		console.log(process.cwd())
+		//process.chdir("../../../");
+		//console.log(process.cwd())
 	}
 
 	getStreams() { return this.streams }

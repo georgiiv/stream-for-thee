@@ -35,10 +35,12 @@ app.use(function (req, res, next) {
 
 
 const users = require("./controllers/users");
+const streams = require("./controllers/streams");
 
 
 
 app.use('/api/users', users);
+app.use('/api/streams', streams);
 
 
 

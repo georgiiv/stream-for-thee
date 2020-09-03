@@ -1,16 +1,7 @@
 const NodeMediaServer = require('node-media-server');
 const Encoder = require("./services/encoder");
 const db = require("./models");
-
-const config = {
-	rtmp: {
-		port: 1935,
-		chunk_size: 60000,
-		gop_cache: true,
-		ping: 30,
-		ping_timeout: 60
-	}
-};
+const config = require("./config/rtmp");
 
 var nms = new NodeMediaServer(config)
 
@@ -28,7 +19,7 @@ nms.on('prePublish', (id, StreamPath, args) => {
 	db.User.findOne({where: {streamKey: streamKey}}).then(function(user) {
 		if(user){
 			console.log("Starting Encoder");
-			Encoder.startEncode("rtmp://localhost:55456/"+StreamPath, user);
+			Encoder.startEncode("rtmp://localhost:"+config.rtmp.port+"/"+StreamPath, user);
 		}else{
 			console.log("Bug here. session.reject() is borked and OBS constantly tries to reconnect", "id", session.publishStreamId);
 			session.sendStatusMessage(session.publishStreamId, "error", "NetStream.publish.Unauthorized", "Authorization required.");
