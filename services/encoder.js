@@ -8,9 +8,7 @@ const mkdir = util.promisify(fs.mkdir);
 const ffprobe = util.promisify(ffmpeg.ffprobe);
 
 class Encoder {
-	static #streams;
-
-	//{streamer, streampath}
+	static #liveStreams=[];
 
 	static async getResolution(source){
 		let data = await ffprobe(source);
@@ -38,19 +36,23 @@ class Encoder {
 
 	static async startEncode(source, user) {
 		let stream = await db.Stream.createStream(user);
-
 		let destinationFolder = "./public/streams/" + stream.streamPath;
 
 		await mkdir(destinationFolder);
 		process.chdir(destinationFolder);
 
 		var command = ffmpeg(source)
-			.on('start', function(ffmpegCommand) {
+			.on('start', (ffmpegCommand) => {
 				process.chdir("../../../");
 				console.log(ffmpegCommand)
+
+				this.#liveStreams.push(stream.id);
 			})
-			.on('end', function () {
+			.on('end', () => {
 				console.log('Reencode finished !');
+				//console.log("Before pop", this.#liveStreams);
+				this.#liveStreams.pop(stream.id);
+				//console.log("After pop", this.#liveStreams);
 			})
 			.on('error', function(err, stdout, stderr){
 				console.log('Cannot process video: ' + err.message);
@@ -86,7 +88,7 @@ class Encoder {
 		//console.log(process.cwd())
 	}
 
-	getStreams() { return this.streams }
+	static getStreams() { return this.#liveStreams }
 }
 
 module.exports = Encoder;

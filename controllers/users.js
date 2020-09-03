@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
 	}
 });
 
-router.post('/login', async (req, res) => {
+router.get('/login', async (req, res) => {
 	passport.authenticate("local", function(err, user, info){
 		if (err) { return next(err); } 
         // user will be set to false, if not authenticated
