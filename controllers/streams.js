@@ -15,7 +15,16 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:username', async (req, res) => {
-
+	stream = await db.Stream.findOne({
+		attributes: ['id', 'streamName', 'streamPath', 'playList', 'createdAt'],
+		where: { id: Encoder.getStreams() },
+		include: [{
+			model: db.User,
+			attributes: ['id', 'userName'],
+			where: { userName: req.params.username }
+		}]
+	})
+	res.send(stream);
 });
 
 module.exports = router;

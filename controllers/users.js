@@ -41,7 +41,7 @@ router.get('/login', async (req, res) => {
 });
 
 router.get('/:username/videos', async (req, res) => {
-	videos = await db.User.findAll({
+	videos = await db.User.findOne({
 		attributes: ['id', 'userName'],
 		where: { userName: req.params.username },
 		include: [{
