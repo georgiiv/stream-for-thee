@@ -44,7 +44,7 @@ app.use('/api/streams', streams);
 
 
 
-app.use('/', serveStatic('./public/client/'));
+//app.use('/', serveStatic('./public/client/'));
 app.use(serveStatic('./public'));
 
 
