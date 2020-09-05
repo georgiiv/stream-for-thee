@@ -40,6 +40,10 @@ router.get('/login', async (req, res) => {
 	})(req, res);
 });
 
+router.get('/:username', async (req, res) => {
+	res.send("To Do")
+});
+
 router.get('/:username/videos', async (req, res) => {
 	videos = await db.User.findOne({
 		attributes: ['id', 'userName'],
