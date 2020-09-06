@@ -1,20 +1,24 @@
 import React from 'react';
 import Clappr from 'clappr';
 import LevelSelector from 'level-selector';
+import P2PMediaLoader, {Engine} from 'p2p-media-loader-hlsjs'
 import "../App.css";
 
 class ClapprPlayer extends React.Component {
 	constructor(props) {
 		super(props)
+		this.engine = new Engine();
 		this.playerInstance = new Clappr.Player({
 			autoPlay: true,
 			mute: true,
-			// chromeless:true,
 			hlsjsConfig: {
-				enableWorker: true
+				enableWorker: true,
+				liveSyncDurationCount: 7,
+				loader: this.engine.createLoaderClass()
 			},
 			plugins: [LevelSelector]
-		})
+		})		
+		P2PMediaLoader.initClapprPlayer(this.playerInstance);
 		this.nodeRef = React.createRef()
 	}
 
@@ -24,7 +28,8 @@ class ClapprPlayer extends React.Component {
 	}
 
 	componentWillUnmount() {
-		this.playerInstance.destroy()
+		this.playerInstance.destroy();
+		this.engine.destroy();
 	}
 
 	shouldComponentUpdate(nextProps, _) {

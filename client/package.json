@@ -5,10 +5,12 @@
   "dependencies": {
     "clappr": "^0.3.13",
     "level-selector": "^0.2.0",
+    "p2p-media-loader-hlsjs": "^0.6.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "0.9.5"
+    "react-scripts": "0.9.5",
+    "socket.io-client": "^2.3.0"
   },
   "devDependencies": {},
   "scripts": {

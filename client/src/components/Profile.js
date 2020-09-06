@@ -1,7 +1,7 @@
 import React from 'react';
 import "../App.css";
 
-class Login extends React.Component {
+class Profile extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {profileInfo: ""}
@@ -9,7 +9,7 @@ class Login extends React.Component {
 	}
 
 	getUserInfo() {
-		this.source = fetch("/api/auth/login?username=atanas&password=1234").then(res => res.json())
+		this.source = fetch("/api/auth/").then(res => res.json())
 		.then((source) => {
 				this.setState({
 					isLoaded: true,
@@ -21,11 +21,11 @@ class Login extends React.Component {
 	render() {		
 		return (
 			<div>
-				<h1>Login</h1>
+				<h1>Profile</h1>
 				<p>{JSON.stringify(this.state.profileInfo)}</p>
 			</div>
 		)
 	}
 }
 
-export default Login;
+export default Profile;

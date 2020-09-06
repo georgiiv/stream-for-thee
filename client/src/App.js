@@ -7,8 +7,9 @@ import Nav from './components/Nav';
 import About from './components/About';
 import Home from './components/Home';
 import Streams from './components/Streams';
-import Login from './components/Streams';
+import Login from './components/Login';
 import Stream from './components/Stream';
+import Profile from './components/Profile';
 
 class App extends Component {
 	render() {
@@ -21,6 +22,7 @@ class App extends Component {
 						<Route path="/About" component={About}/>
 						<Route path="/Streams" component={Streams}/>
 						<Route path="/Login" component={Login}/>
+						<Route path="/Profile" component={Profile}/>
 						<Route path='/:username' component={Stream} />
 					</Switch>					
 				</div>

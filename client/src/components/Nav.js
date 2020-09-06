@@ -20,6 +20,9 @@ function Nav(){
 				<Link style={navStyle} to='/Streams' >
 					<li>Streams</li>
 				</Link>
+				<Link style={navStyle} to='/Profile' >
+					<li>Profile</li>
+				</Link>
 			</ul>
 		</nav>
 	);

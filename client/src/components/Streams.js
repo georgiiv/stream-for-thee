@@ -26,9 +26,9 @@ class Streams extends React.Component {
 					{this.state.streams.map(stream => (
 						<div>
 							<a href={"/"+stream.User.userName}>
-								<img src={"streams"+stream.streamPath+stream.thumbnail}></img>
-								<p>{stream.streamName}</p>
-								<p>{stream.User.userName}</p>
+								<img className="streamThumbnail" src={"streams"+stream.streamPath+stream.thumbnail}></img>
+								<p className="streamTitle">{stream.streamName}</p>
+								<p className="streamerName">{stream.User.userName}</p>
 							</a>
 						</div>
 					))}
