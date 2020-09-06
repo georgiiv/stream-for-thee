@@ -5,7 +5,10 @@ import "../App.css";
 class Stream extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {streamUrl: ""}
+		this.state = {
+			streamUrl: "",
+		}
+
 		this.getStream();
 	}
 
