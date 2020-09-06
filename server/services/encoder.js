@@ -149,7 +149,7 @@ class Encoder {
 				]).outputOption('-var_stream_map', 'v:0,a:0 v:1,a:1')
 			command.save('stream_%v.m3u8');			
 		})
-		thumb.save('thumbnail.png');
+		thumb.save('thumbnail.jpg');
 	}
 
 }

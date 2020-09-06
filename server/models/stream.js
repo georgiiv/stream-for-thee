@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		playList: {
 			type: DataTypes.STRING
+		},
+		thumbnail: {
+			type: DataTypes.STRING
 		}
 	}, {
 		// Other model options go here
@@ -32,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
 			streamName: "Untitled",
 			streamPath: "/" + user.userName + "_" + require("crypto").randomBytes(10).toString('hex') + "/",
 			playList: "master.m3u8",
+			thumbnail: "thumbnail.jpg",
 			userId: user.id
 		}).save();;
 		}catch(error){
