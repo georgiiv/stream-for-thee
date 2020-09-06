@@ -37,12 +37,14 @@ app.use(function (req, res, next) {
 const users = require("./controllers/users");
 const streams = require("./controllers/streams");
 const auth = require("./controllers/auth");
+const chat = require("./controllers/chat");
 
 
 
 app.use('/api/users', users);
 app.use('/api/streams', streams);
 app.use('/api/auth', auth);
+app.use('/api/chat', chat);
 
 
 

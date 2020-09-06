@@ -35,6 +35,16 @@ module.exports = (sequelize, DataTypes) => {
 				name: 'userId'
 			}
 		});
+		User.hasMany(models.Chat, {
+			foreignKey: {
+				name: 'senderId'
+			}
+		});
+		User.hasMany(models.Chat, {
+			foreignKey: {
+				name: 'recieverId'
+			}
+		});
 	}
 
 	User.Test = function(){return "Asd"}
