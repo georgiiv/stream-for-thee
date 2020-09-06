@@ -19,7 +19,7 @@ nms.on('prePublish', (id, StreamPath, args) => {
 	db.User.findOne({where: {streamKey: streamKey}}).then(function(user) {
 		if(user){
 			console.log("Starting Encoder");
-			Encoder.startEncode("rtmp://localhost:"+config.rtmp.port+"/"+StreamPath, user);
+			Encoder.smellyEncoder("rtmp://localhost:"+config.rtmp.port+"/"+StreamPath, user);
 		}else{
 			console.log("Bug here. session.reject() is borked and OBS constantly tries to reconnect", "id", session.publishStreamId);
 			session.sendStatusMessage(session.publishStreamId, "error", "NetStream.publish.Unauthorized", "Authorization required.");
