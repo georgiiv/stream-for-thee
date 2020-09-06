@@ -21,6 +21,9 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.STRING,
 			allowNull: false,
 			unique: true
+		},
+		profilePicture: {
+			type: DataTypes.STRING
 		}
 	}, {
 		// Other model options go here
@@ -54,7 +57,8 @@ module.exports = (sequelize, DataTypes) => {
 			userName: username, 
 			email: email, 
 			password: await bcrypt.hash(password, 10),
-			streamKey: require("crypto").randomBytes(20).toString('hex')
+			streamKey: require("crypto").randomBytes(20).toString('hex'),
+			profilePicture: 'avatar.jpg'
 		}).save();
 
 		return user;
