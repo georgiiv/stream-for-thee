@@ -1,25 +1,41 @@
-import React, { useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import "../App.css";
 
-function Streams(){
-	useEffect(()=>{
-		fetchItems();
-	},[])
-
-	const fetchItems = async () => {
-		const data = await fetch("/api/users/atanas/videos");
-		const session = await fetch("/api/users/login?username=atanas&password=1234");
-		const currentUser = await fetch("/api/users/");
-		console.log(await data.json());
-		console.log(await currentUser.json());
+class Streams extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {streams: []}
+		this.getStreams();
 	}
 
+	getStreams() {
+		this.source = fetch("/api/streams/").then(res => res.json())
+		.then((source) => {
+				this.setState({
+					isLoaded: true,
+					streams: source
+				});
+		})
+	}
 
-	return(
-		<div>
-			<h1>Stream page</h1>
-		</div>
-	);
+	render() {		
+		return (
+			<div>
+				<h1>Streams</h1>
+				<div>
+					{this.state.streams.map(stream => (
+						<div>
+							<a href={"/"+stream.User.userName}>
+								<img src={"streams"+stream.streamPath+stream.thumbnail}></img>
+								<p>{stream.streamName}</p>
+								<p>{stream.User.userName}</p>
+							</a>
+						</div>
+					))}
+				</div>
+			</div>
+		)
+	}
 }
 
 export default Streams;

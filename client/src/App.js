@@ -8,6 +8,7 @@ import About from './components/About';
 import Home from './components/Home';
 import Streams from './components/Streams';
 import Login from './components/Streams';
+import Stream from './components/Stream';
 
 class App extends Component {
 	render() {
@@ -20,6 +21,7 @@ class App extends Component {
 						<Route path="/About" component={About}/>
 						<Route path="/Streams" component={Streams}/>
 						<Route path="/Login" component={Login}/>
+						<Route path='/:username' component={Stream} />
 					</Switch>					
 				</div>
 			</Router>

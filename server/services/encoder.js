@@ -107,7 +107,8 @@ class Encoder {
 		process.chdir(destinationFolder);
 
 		var thumb = ffmpeg(source)
-		.outputOption('-vframes 1')			
+		.outputOption('-vframes 1')
+		.outputOption('-vf scale=448:252')			
 		.on('end', () => {
 			var command = ffmpeg(source)
 				.on('start', (ffmpegCommand) => {
