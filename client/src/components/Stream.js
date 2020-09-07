@@ -1,5 +1,6 @@
 import React from 'react';
 import ClapprPlayer from './ClapprPlayer';
+import Chat from './Chat';
 import "../App.css";
 
 class Stream extends React.Component {
@@ -26,6 +27,7 @@ class Stream extends React.Component {
 		if(this.state.streamUrl === ""){
 			return (
 				<div>
+					<Chat/>
 					<h1>Offline bepce</h1>
 				</div>
 			)

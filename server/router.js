@@ -1,13 +1,16 @@
 const express = require('express');
+const app = express();
+const server = require('http').Server(app); // socket.io needs this
 const serveStatic = require('serve-static');
 const passport = require("passport");
 const session = require("express-session");
 const FileStore = require("session-file-store")(session);
-const passportStrategy = require("./passport")
+const passportStrategy = require("./passport");
+
+const Chat = require('./services/chat').init(server);
 
 const port = require("./config/express").port;
 
-const app = express();
 app.use(express.json());
 app.use(session({
 	store: new FileStore(),
@@ -55,7 +58,7 @@ app.use(serveStatic('./public'));
 
 
 app.run = () => {
-	app.listen(port, function () {
+	server.listen(port, function () {
 		console.log('Server started on port:', port);
 	})
 }
