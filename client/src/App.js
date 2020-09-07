@@ -8,6 +8,8 @@ import About from './components/About';
 import Home from './components/Home';
 import Streams from './components/Streams';
 import Login from './components/Login';
+import Logout from './components/Logout';
+import Register from './components/Register';
 import Stream from './components/Stream';
 import Profile from './components/Profile';
 
@@ -22,6 +24,8 @@ class App extends Component {
 						<Route path="/About" component={About}/>
 						<Route path="/Streams" component={Streams}/>
 						<Route path="/Login" component={Login}/>
+						<Route path="/Logout" component={Logout}/>
+						<Route path="/Register" component={Register}/>
 						<Route path="/Profile" component={Profile}/>
 						<Route path='/:username' component={Stream} />
 					</Switch>					

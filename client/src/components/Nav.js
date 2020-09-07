@@ -23,6 +23,15 @@ function Nav(){
 				<Link style={navStyle} to='/Profile' >
 					<li>Profile</li>
 				</Link>
+				<Link style={navStyle} to='/Login' >
+					<li>Login</li>
+				</Link>
+				<Link style={navStyle} to='/Register' >
+					<li>Register</li>
+				</Link>
+				<Link style={navStyle} to='/Logout' >
+					<li>Logout</li>
+				</Link>
 			</ul>
 		</nav>
 	);

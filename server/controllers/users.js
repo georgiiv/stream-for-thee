@@ -3,7 +3,15 @@ const passport = require("passport");
 const db = require("../models/");
 
 router.get('/', async (req, res) => {
-	res.send(req.user);
+	res.send({
+		id: req.user.id,
+		userName: req.user.userName,
+		email: req.user.email,
+		profilePicture: req.user.profilePicture,		
+		streamKey: req.user.streamKey,
+		createdAt: req.user.createdAt,
+		updatedAt: req.user.updatedAt,
+	});
 });
 
 router.get('/:username', async (req, res) => {

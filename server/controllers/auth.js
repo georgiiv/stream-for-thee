@@ -3,10 +3,18 @@ const passport = require("passport");
 const db = require("../models/");
 
 router.get('/', async (req, res) => {
-	res.send(req.user);
+	res.send({
+		id: req.user.id,
+		userName: req.user.userName,
+		email: req.user.email,
+		profilePicture: req.user.profilePicture,		
+		streamKey: req.user.streamKey,
+		createdAt: req.user.createdAt,
+		updatedAt: req.user.updatedAt,
+	});
 });
 
-router.get('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
 	passport.authenticate("local", function (err, user, info) {
 		if (err) { return next(err); }
 		// user will be set to false, if not authenticated
@@ -26,13 +34,13 @@ router.post('/register', async (req, res) => {
 	const { username, email, password, repeatPassword } = req.body;
 
 	if (await db.User.findByUsername(username)) {
-		res.send("Username already exists.");
+		res.send(409, "Username already exists.");
 	}
 	else if (await db.User.findByEmail(email)) {
-		res.send("Email already exists.");
+		res.send(409, "Email already exists.");
 	}
 	else if (password != repeatPassword) {
-		res.send("Passwords don't match.");
+		res.send(409 , "Passwords don't match.");
 	}
 	else {
 		await db.User.createUser(username, email, password, repeatPassword);
@@ -40,9 +48,9 @@ router.post('/register', async (req, res) => {
 	}
 });
 
-router.get('/logout', async (req, res) => {
+router.post('/logout', async (req, res) => {
 		req.logout();
-		res.send("Loged out.");
+		res.send("Logged out.");
 });
 
 module.exports = router;
