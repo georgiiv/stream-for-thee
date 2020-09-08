@@ -10,6 +10,25 @@ nav{
 	background: rgb(0, 185, 241);
 }
 
+.nav-style{
+	color: white;
+	text-decoration: none;
+}
+
+.chat-style{
+	width: 350px;
+	height: 400px;
+	margin: 0 auto;
+	text-align: left;
+	overflow-wrap: break-word;
+	overflow: scroll;
+    word-wrap: break-word;
+}
+
+.nav-active{
+	color:rgb(0, 0, 0);
+}
+
 .nav-links{
 	width: 50%;
 	display: flex;

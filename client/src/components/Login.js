@@ -1,5 +1,4 @@
 import React from 'react';
-import "../App.css";
 
 class Login extends React.Component {
 	constructor(props) {
@@ -41,8 +40,10 @@ class Login extends React.Component {
 				password: this.state.password
 			})
 		});
-		console.log(await response);
-		return response;
+
+		if(response.status === 200){
+			window.location.href = '/Profile';
+		}
 	}
 
 	render() {

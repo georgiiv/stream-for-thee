@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const passport = require("passport");
 const db = require("../models/");
+const Helpers = require("../helpers/helpers");
 
-router.get('/', async (req, res) => {
+router.get('/', Helpers.checkAuthenticated, async (req, res) => {
 	res.send({
 		id: req.user.id,
 		userName: req.user.userName,
@@ -34,23 +35,23 @@ router.post('/register', async (req, res) => {
 	const { username, email, password, repeatPassword } = req.body;
 
 	if (await db.User.findByUsername(username)) {
-		res.send(409, "Username already exists.");
+		res.status(409).send("Username already exists.");
 	}
 	else if (await db.User.findByEmail(email)) {
-		res.send(409, "Email already exists.");
+		res.status(409).send("Email already exists.");
 	}
 	else if (password != repeatPassword) {
-		res.send(409 , "Passwords don't match.");
+		res.status(409).send("Passwords don't match.");
 	}
 	else {
 		await db.User.createUser(username, email, password, repeatPassword);
-		res.send("User created.");
+		res.status(200).send("User created.");
 	}
 });
 
 router.post('/logout', async (req, res) => {
 		req.logout();
-		res.send("Logged out.");
+		res.status(200).send("Logged out.");
 });
 
 module.exports = router;

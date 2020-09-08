@@ -1,6 +1,4 @@
-import React, {useState, useEffect} from 'react';
-
-import "../App.css";
+import React from 'react';
 
 class Streams extends React.Component {
 	constructor(props) {
@@ -27,7 +25,7 @@ class Streams extends React.Component {
 					{this.state.streams.map(stream => (
 						<div>
 							<a href={"/"+stream.User.userName}>
-								<img className="streamThumbnail" src={"streams"+stream.streamPath+stream.thumbnail}></img>
+								<img className="streamThumbnail" src={"streams"+stream.streamPath+stream.thumbnail} alt="Stream Thumbnail"></img>
 								<p className="streamTitle">{stream.streamName}</p>
 								<p className="streamerName">{stream.User.userName}</p>
 							</a>

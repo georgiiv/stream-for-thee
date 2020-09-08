@@ -26,7 +26,19 @@ router.get('/:username', async (req, res) => {
 			where: { userName: req.params.username }
 		}]
 	})
-	res.send(stream);
+	if(stream){
+		console.log("i am online \n\n\n\n\n\n\n\n")
+		res.send({
+			live: true,
+			stream: stream
+		});
+	}
+	else{
+		console.log("i am offline \n\n\n\n\n\n\n\n")
+		res.send({
+			live: false
+		});
+	}
 });
 
 module.exports = router;

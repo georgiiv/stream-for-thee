@@ -1,6 +1,5 @@
 import React from 'react';
 import io from 'socket.io-client';
-import "../App.css";
 
 const SOCKET_ENDPOINT = '/';
 
@@ -9,18 +8,21 @@ class Chat extends React.Component {
 		super(props);
 
 		this.state = {
-			response: "Loading",
+			isLoggedIn: false,
 			message: "",
+			chat: []
 		};
 
 		this.socket = io(SOCKET_ENDPOINT)
 
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.getUserInfo();
 	}
 
 	componentDidMount() {
-		this.socket.emit('join-room', "atanas");
+		console.log(this.props.streamer);
+		this.socket.emit('join-room', this.props.streamer);
 
 		this.socket.on('room-entered', (data) => {
 			this.setState({
@@ -28,30 +30,44 @@ class Chat extends React.Component {
 			})
 		})
 
-		this.socket.on('chat-message', (data) => {
+		this.socket.on('chat-message', (sender, message) => {
 			this.setState({
-				response: data
+				chat: this.state.chat.concat({ sender: sender, content: message })
 			})
 		})
-	}	
+	}
+
+	componentDidUpdate() {
+	}
 
 	componentWillUnmount() {
 		this.socket.close()
+	}
+
+	getUserInfo() {
+		this.source = fetch("/api/auth/").then(res => res.json())
+			.then((source) => {
+				if (source) {
+					this.setState({
+						isLoggedIn: true
+					});
+				}
+			})
 	}
 
 	handleInputChange(event) {
 		this.setState({
 			message: event.target.value
 		});
-	}	
+	}
 
 	handleSubmit(event) {
-		event.preventDefault();		
+		event.preventDefault();
 		this.postMessage();
 	}
 
-	async postMessage(){
-		const response = await fetch("/api/chat/atanas", {
+	async postMessage() {
+		const response = await fetch("/api/chat/" + this.props.streamer, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -60,21 +76,39 @@ class Chat extends React.Component {
 				message: this.state.message
 			})
 		});
-		console.log(await response);
+
+		this.setState({
+			message: ""
+		})
+
 		return response;
 	}
 
 	render() {
-		const { response } = this.state;
+		let isLoggedIn = this.state.isLoggedIn;
 		return (
 			<div>
-				<div>{response}</div>
+
+				<div className="chat-style">
+					{this.state.chat.map(message => (
+						<p>{message.sender + ": " + message.content}</p>
+					))}
+				</div>
 				<form onSubmit={this.handleSubmit}>
 					<label>
 						Message:
 						<input type="text" value={this.state.message} onChange={this.handleInputChange} />
 					</label>
-					<input type="submit" value="Submit" />
+					{isLoggedIn
+						? [
+							<input type="submit" value="Send" />
+						]
+						: [
+							<input type="submit" value="Send" disabled />
+						]
+					}
+
+					<h1>{}</h1>
 				</form>
 			</div>
 		);

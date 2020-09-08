@@ -1,5 +1,4 @@
 import React from 'react';
-import "../App.css";
 
 class Login extends React.Component {
 	constructor(props) {
@@ -19,14 +18,16 @@ class Login extends React.Component {
 				'Content-Type': 'application/json'
 			}
 		});
-		console.log(await response);
+		if(response.status === 200){
+			window.location.href = '/Login';
+		}
 		return response;
-}
+	}
 
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<input type="submit" value="Submit" />
+				<input type="submit" value="Backup logout button" />
 			</form>
 		);
 	}

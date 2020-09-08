@@ -1,5 +1,4 @@
 import React from 'react';
-import "../App.css";
 
 class Register extends React.Component {
 	constructor(props) {
@@ -57,7 +56,11 @@ class Register extends React.Component {
 				repeatPassword: this.state.repeatPassword
 			})
 		});
-		console.log(await response);
+
+		if (response.status === 200){
+			window.location.href = '/Login';
+		}
+
 		return response;
 }
 

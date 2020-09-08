@@ -9,17 +9,17 @@ class Chat {
 		this.createEvents();
 	}
 
-	static sendToRoom(room, message){
+	static sendToRoom(sender, room, message){
 		room = room.toLowerCase();
-		this.io.to(room).emit('chat-message', message);
+		this.io.to(room).emit('chat-message', sender, message);
 	}
 
 	static createEvents() {
 		this.io.on('connection', socket => {
 
 			socket.on('join-room', (room) => {
+				console.log("\n\n\n\n\n\n\n\n", room);
 				socket.join(room.toLowerCase());
-				this.sendToRoom("ATANAS", "Atanas room entered");
 			})
 
 			socket.on('disconnect', () => {

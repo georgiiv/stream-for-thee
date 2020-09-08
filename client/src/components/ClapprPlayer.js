@@ -4,8 +4,6 @@ import LevelSelector from 'level-selector';
 import {Engine, initClapprPlayer} from 'p2p-media-loader-hlsjs'
 import {Events} from 'p2p-media-loader-core'
 
-import "../App.css";
-
 class ClapprPlayer extends React.Component {
 	constructor(props) {
 		super(props)
