@@ -1,4 +1,5 @@
 import React from 'react';
+import { Row, Col, Button, Form, Card } from 'react-bootstrap';
 
 class Login extends React.Component {
 	constructor(props) {
@@ -47,18 +48,40 @@ class Login extends React.Component {
 	}
 
 	render() {
+		// return (
+		// 	<Form onSubmit={this.handleSubmit}>
+		// 		<label>
+		// 			Name:
+		// 			<input type="text" value={this.state.username} onChange={this.handleUsernameChange} />
+		// 		</label>
+		// 		<label>
+		// 			Password:
+		// 			<input type="password" value={this.state.password} onChange={this.handlePasswordChange} />
+		// 		</label>
+		// 		<Button type="submit" variant="primary">Login</Button>
+		// 	</Form>
+		// );
+
 		return (
-			<form onSubmit={this.handleSubmit}>
-				<label>
-					Name:
-					<input type="text" value={this.state.username} onChange={this.handleUsernameChange} />
-				</label>
-				<label>
-					Password:
-					<input type="password" value={this.state.password} onChange={this.handlePasswordChange} />
-				</label>
-				<input type="submit" value="Submit" />
-			</form>
+			<Row className="justify-content-md-center">
+				<Col xs lg="3">
+					<Card>
+						<Card.Title className="text-center">Login</Card.Title>
+						<Card.Body>
+							<Form onSubmit={this.handleSubmit}>
+								<Form.Group controlId="exampleForm.ControlInput1">
+									<Form.Control type="text" value={this.state.username} placeholder="Username" onChange={this.handleUsernameChange} />
+								</Form.Group>
+
+								<Form.Group controlId="exampleForm.ControlInput1">
+									<Form.Control type="password" value={this.state.password} placeholder="Password" onChange={this.handlePasswordChange} />
+								</Form.Group>
+								<Button type="submit" variant="primary" size="lg" block>Login</Button>
+							</Form>
+						</Card.Body>
+					</Card>
+				</Col>
+			</Row>
 		);
 	}
 }

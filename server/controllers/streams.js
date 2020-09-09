@@ -22,7 +22,7 @@ router.get('/:username', async (req, res) => {
 		where: { id: Encoder.getStreams() },
 		include: [{
 			model: db.User,
-			attributes: ['id', 'userName'],
+			attributes: ['id', 'userName', 'profilePicture'],
 			where: { userName: req.params.username }
 		}]
 	})

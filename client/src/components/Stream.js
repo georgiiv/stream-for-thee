@@ -1,12 +1,14 @@
 import React from 'react';
 import ClapprPlayer from './ClapprPlayer';
 import Chat from './Chat';
+import { Row, Col } from 'react-bootstrap';
 
 class Stream extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			streamUrl: "",
+			streamInfo: {}
 		}
 
 		this.getStream();
@@ -22,8 +24,8 @@ class Stream extends React.Component {
 			let source = res.stream;
 
 			this.setState({
-				isLoaded: true,
-				streamUrl: "/streams" + source.streamPath + source.playList
+				streamUrl: "/streams" + source.streamPath + source.playList,
+				streamInfo: source
 			});
 		}
 	}
@@ -39,10 +41,18 @@ class Stream extends React.Component {
 		}
 		
 		return (
-			<div>
-				<h1>Stream</h1>
-				<ClapprPlayer source={this.state.streamUrl} />
-				<Chat/>
+			<div class="container-fluid">
+				<Row>
+					<Col Col xs lg="9">						
+						<ClapprPlayer source={this.state.streamUrl} />			
+						<h2>Title: {this.state.streamInfo.streamName}</h2>						
+						<img className="stream-profile-picture" src={"/avatars/"+this.state.streamInfo.User.profilePicture} alt={this.state.streamInfo.User.userName}/>
+						<a href="#">{this.state.streamInfo.User.userName}</a>
+					</Col>
+					<Col Col xs lg="3">
+						<Chat streamer={this.props.match.params.username}/>
+					</Col>				
+				</Row>
 			</div>
 		)
 	}

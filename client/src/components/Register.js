@@ -1,4 +1,5 @@
 import React from 'react';
+import { Row, Col, Button, Form, Card } from 'react-bootstrap';
 
 class Register extends React.Component {
 	constructor(props) {
@@ -66,25 +67,33 @@ class Register extends React.Component {
 
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>
-				<label>
-					Name:
-						<input type="text" value={this.state.username} onChange={this.handleUsernameChange} />
-				</label>
-				<label>
-					Email:
-						<input type="email" value={this.state.emails} onChange={this.handleEmailChange} />
-				</label>
-				<label>
-					Password:
-						<input type="password" value={this.state.password} onChange={this.handlePasswordChange} />
-				</label>
-				<label>
-					Repeat Password:
-						<input type="password" value={this.state.repeatPassword} onChange={this.handlerepeatPasswordChange} />
-				</label>
-				<input type="submit" value="Submit" />
-			</form>
+			<Row className="justify-content-md-center">
+				<Col xs lg="3">
+					<Card>
+						<Card.Title className="text-center" >Register</Card.Title>
+						<Card.Body>
+							<Form onSubmit={this.handleSubmit}>
+								<Form.Group controlId="exampleForm.ControlInput1">
+									<Form.Control type="text" value={this.state.username} placeholder="Username" onChange={this.handleUsernameChange} />
+								</Form.Group>
+
+								<Form.Group controlId="exampleForm.ControlInput1">
+									<Form.Control type="text" value={this.state.emails} placeholder="Username" onChange={this.handleEmailChange} />
+								</Form.Group>
+
+								<Form.Group controlId="exampleForm.ControlInput1">
+									<Form.Control type="password" value={this.state.password} placeholder="Username" onChange={this.handlePasswordChange} />
+								</Form.Group>
+
+								<Form.Group controlId="exampleForm.ControlInput1">
+									<Form.Control type="password" value={this.state.repeatPassword} placeholder="Password" onChange={this.handlerepeatPasswordChange} />
+								</Form.Group>
+								<Button type="submit" variant="primary" size="lg" block>Register</Button>
+							</Form>
+						</Card.Body>
+					</Card>
+				</Col>
+			</Row>
 		);
 	}
 }

@@ -20,7 +20,7 @@ class Streams extends React.Component {
 	render() {		
 		return (
 			<div>
-				<h1>Streams</h1>
+				<h1 className="text-center">Streams</h1>
 				<div>
 					{this.state.streams.map(stream => (
 						<div>

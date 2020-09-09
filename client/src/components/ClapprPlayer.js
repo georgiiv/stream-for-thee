@@ -21,7 +21,9 @@ class ClapprPlayer extends React.Component {
 				liveSyncDurationCount: 7,
 				loader: this.engine.createLoaderClass()
 			},
-			plugins: [LevelSelector]
+			plugins: [LevelSelector],
+			width: '100%',
+			height: 'auto'
 		})		
 		initClapprPlayer(this.playerInstance);
 		this.nodeRef = React.createRef()

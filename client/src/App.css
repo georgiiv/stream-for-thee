@@ -1,13 +1,43 @@
-.App {
-	text-align: center;
+body{
+	background-image: radial-gradient(circle, #a8a0a2, #b3adb5, #b7bdc9, #b9ced6, #c2deda);
+	background-attachment: fixed;
 }
 
-nav{
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	min-height: 5px;
-	background: rgb(0, 185, 241);
+[data-player] {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0;    
+}
+
+/* Fix the video container to take up 100% width and to calculate its height based on its children. */
+[data-player] .container[data-container] {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+/* Fix the media-control element to take up the entire size of the player. */
+[data-player] .media-control[data-media-control] {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+/* Fix the video element to take up 100% width and to calculate its height based on its natural aspect ratio. */
+[data-player] video {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.stream-profile-picture{
+	height: 50px;
+	width: auto;
+	border-radius: 50%;
+
 }
 
 .nav-style{
@@ -17,7 +47,7 @@ nav{
 
 .chat-style{
 	width: 350px;
-	height: 400px;
+	height: 750px;
 	margin: 0 auto;
 	text-align: left;
 	overflow-wrap: break-word;
