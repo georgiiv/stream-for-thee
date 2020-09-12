@@ -27,7 +27,7 @@ test('Test denial creation of user with existing username', async () => {
 		user = await db.User.createUser(testUser.userName, "dfgdfgdfg1@tsdfghsfghsfdgh", "parola")
 	}catch(e){
 		expect(e);
-	}	
+	}
 });
 
 test('Tests creation of user', async () => {

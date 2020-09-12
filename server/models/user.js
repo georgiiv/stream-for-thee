@@ -57,11 +57,6 @@ module.exports = (sequelize, DataTypes) => {
 		});
 	}
 
-	User.Test = function(){return "Asd"}
-	User.prototype.getName = function(){
-		return this.userName;
-	}
-
 	User.findByStreamKey = async function(streamKey){
 		return User.findOne({where: {streamKey: streamKey}});
 	}
