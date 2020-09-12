@@ -1,8 +1,16 @@
 import React from 'react';
+import {} from "react-bootstrap"
 
 function Home(){
 	return(
-		<h1 className="text-center">Home page</h1>
+		<>
+			<br></br>
+			<br></br>
+			<br></br>
+			<h1 className="text-center text-uppercase font-weight-bold home-title">Stream For Thee</h1>
+			<br></br>
+			<h4 className="text-center home-title">Graduation project made by: Georgi Ivanov</h4>
+		</>
 	);
 }
 

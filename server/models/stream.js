@@ -45,5 +45,13 @@ module.exports = (sequelize, DataTypes) => {
 		return stream;
 	}
 
+	Stream.deleteStreamWithId = async function(id){
+		await Stream.destroy({
+			where: {id: id}
+		});
+
+		return true;
+	}
+
 	return Stream;
 }

@@ -25,13 +25,21 @@ module.exports = (sequelize, DataTypes) => {
 	}
 
 	Chat.createMessage = async function(senderId, recieverId, message){
-		user = await Chat.build({
+		message = await Chat.build({
 			message: message,
 			senderId: senderId,
 			recieverId: recieverId
 		}).save();
 
-		return user;
+		return message;
+	}
+
+	Chat.deleteMessageWithId = async function(id){
+		await Chat.destroy({
+			where: {id: id}
+		});
+
+		return true;
 	}
 
 	return Chat;

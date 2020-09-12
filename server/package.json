@@ -4,7 +4,7 @@
   "description": "Diploma project for TU-Sofia",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "nodemon app.js --ignore sessions/ --ignore client/ --ignore public/"
   },
   "author": "Georgi Ivanov",
@@ -24,6 +24,7 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
+    "jest": "^26.4.2",
     "nodemon": "^2.0.4"
   }
 }

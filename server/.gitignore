@@ -2,5 +2,6 @@ node_modules
 sessions
 public/streams
 public/emoticons
+coverage
 
 *.rest

@@ -20,10 +20,11 @@ class Streams extends React.Component {
 	render() {		
 		return (
 			<div>
+				<br></br>
 				<h1 className="text-center">Streams</h1>
 				<div>
 					{this.state.streams.map(stream => (
-						<div>
+						<div className = "text-center">
 							<a href={"/"+stream.User.userName}>
 								<img className="streamThumbnail" src={"streams"+stream.streamPath+stream.thumbnail} alt="Stream Thumbnail"></img>
 								<p className="streamTitle">{stream.streamName}</p>
