@@ -10,17 +10,21 @@ class Videos extends React.Component {
 		this.getVideos();
 	}
 
-	getVideos() {
-		console.log("\n\n\n\n\n\n\n\n", "HELPPPPPPPPPPPPPPP")
-		this.source = fetch("/api/users/"+this.props.match.params.username+"/videos").then(res => res.json())
-		.then((source) => {
-				console.log(source)
-				this.setState({
-					isLoaded: true,
-					videos: source.Streams.reverse(),
-					username: source.userName
-				});
-		})
+	async getVideos() {
+		let source = await fetch("/api/users/"+this.props.match.params.username+"/videos")
+		
+		try{
+			source = await source.json()
+			this.setState({
+				isLoaded: true,
+				videos: source.Streams.reverse(),
+				username: source.userName
+			});
+		}catch(e){
+			console.log("User does not exist");
+		}
+		
+		
 	}
 
 	render() {		

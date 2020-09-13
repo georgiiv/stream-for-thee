@@ -16,14 +16,16 @@ class Stream extends React.Component {
 
 	async getStream(){
 		let res = await fetch("/api/streams/id/" + this.props.match.params.id);
-		res = await res.json();
-
-		console.log(res);		
-
+		try{
+			res = await res.json();
 			this.setState({
 				streamUrl: "/streams" + res.streamPath + res.playList,
 				streamInfo: res
 			});
+		}catch(e){
+			console.log("Video not found");
+		}
+		
 	}
 
 	render() {

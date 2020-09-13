@@ -78,15 +78,15 @@ class Register extends React.Component {
 								</Form.Group>
 
 								<Form.Group controlId="exampleForm.ControlInput1">
-									<Form.Control type="text" value={this.state.emails} placeholder="Username" onChange={this.handleEmailChange} />
+									<Form.Control type="text" value={this.state.emails} placeholder="Email" onChange={this.handleEmailChange} />
 								</Form.Group>
 
 								<Form.Group controlId="exampleForm.ControlInput1">
-									<Form.Control type="password" value={this.state.password} placeholder="Username" onChange={this.handlePasswordChange} />
+									<Form.Control type="password" value={this.state.password} placeholder="Password" onChange={this.handlePasswordChange} />
 								</Form.Group>
 
 								<Form.Group controlId="exampleForm.ControlInput1">
-									<Form.Control type="password" value={this.state.repeatPassword} placeholder="Password" onChange={this.handlerepeatPasswordChange} />
+									<Form.Control type="password" value={this.state.repeatPassword} placeholder="Repeat Password" onChange={this.handlerepeatPasswordChange} />
 								</Form.Group>
 								<Button type="submit" variant="primary" size="lg" block>Register</Button>
 							</Form>
