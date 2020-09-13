@@ -15,27 +15,23 @@ class Stream extends React.Component {
 	}
 
 	async getStream(){
-		let res = await fetch("/api/streams/" + this.props.match.params.username);
+		let res = await fetch("/api/streams/id/" + this.props.match.params.id);
 		res = await res.json();
 
-		console.log(res);
-
-		if( res.live ){			
-			let source = res.stream;
+		console.log(res);		
 
 			this.setState({
-				streamUrl: "/streams" + source.streamPath + source.playList,
-				streamInfo: source
+				streamUrl: "/streams" + res.streamPath + res.playList,
+				streamInfo: res
 			});
-		}
 	}
 
 	render() {
 		if(this.state.streamUrl === ""){
 			return (
 				<div>
-					<h1>Offline</h1>
-					<Chat streamer={this.props.match.params.username} />
+					<br></br>
+					<h1 className="text-center">Video not found</h1>
 				</div>
 			)
 		}
@@ -51,9 +47,9 @@ class Stream extends React.Component {
 							{this.state.streamInfo.User.userName}
 						</a>
 					</Col>
-					<Col Col xs lg="3">
+					{/* <Col Col xs lg="3">
 						<Chat streamer={this.props.match.params.username}/>
-					</Col>				
+					</Col>				 */}
 				</Row>
 			</div>
 		)

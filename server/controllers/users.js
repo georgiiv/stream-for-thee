@@ -28,7 +28,7 @@ router.get('/:username/videos', async (req, res) => {
 		where: { userName: req.params.username },
 		include: [{
 			model: db.Stream,
-			attributes: ['id', 'streamName', 'streamPath', 'playList', 'createdAt']
+			attributes: ['id', 'streamName', 'thumbnail', 'streamPath', 'playList', 'createdAt']
 		}]
 	})
 	res.send(videos);

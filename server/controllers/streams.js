@@ -16,6 +16,19 @@ router.get('/', async (req, res) => {
 	res.send(streams);
 });
 
+router.get('/id/:id', async (req, res) => {
+	stream = await db.Stream.findOne({
+		attributes: ['id', 'streamName', 'streamPath', 'playList', 'createdAt'],
+		where: { id: req.params.id },
+		include: [{
+			model: db.User,
+			attributes: ['id', 'userName', 'profilePicture']
+		}]
+	})
+
+	res.send(stream);
+});
+
 router.get('/:username', async (req, res) => {
 	stream = await db.Stream.findOne({
 		attributes: ['id', 'streamName', 'streamPath', 'playList', 'createdAt'],

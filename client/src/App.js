@@ -12,6 +12,8 @@ import Logout from './components/Logout';
 import Register from './components/Register';
 import Stream from './components/Stream';
 import Profile from './components/Profile';
+import Videos from './components/Videos';
+import Video from './components/Video';
 
 class App extends Component {
 	render() {
@@ -26,6 +28,8 @@ class App extends Component {
 						<Route path="/Logout" component={Logout}/>
 						<Route path="/Register" component={Register}/>
 						<Route path="/Profile" component={Profile}/>
+						<Route path='/Video/:id' component={Video} />
+						<Route path='/:username/Videos' component={Videos} />
 						<Route path='/:username' component={Stream} />
 					</Switch>					
 				</div>
