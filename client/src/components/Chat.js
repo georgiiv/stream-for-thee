@@ -87,20 +87,20 @@ class Chat extends React.Component {
 	render() {
 		let isLoggedIn = this.state.isLoggedIn;
 		return (
-			<div>
+			<div className="chat-holder">
 				<div className="chat-style">
 					{this.state.chat.map(message => (
 						<p>{message.sender + ": " + message.content}</p>
 					))}
 				</div>
 				<form onSubmit={this.handleSubmit} block>
-						<input type="text" value={this.state.message} placeholder="Message" onChange={this.handleInputChange} />
+						<input className="form-control" type="text" value={this.state.message} placeholder="Message" onChange={this.handleInputChange} />
 					{isLoggedIn
 						? [
-							<input type="submit" value="Send" />
+							<input className="chat-send btn btn-primary" type="submit" value="Send" />
 						]
 						: [
-							<input type="submit" value="Send" disabled />
+							<input className="chat-send btn btn-secondary" type="submit" value="Send" disabled />
 						]
 					}
 

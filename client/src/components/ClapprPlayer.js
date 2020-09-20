@@ -10,8 +10,13 @@ class ClapprPlayer extends React.Component {
 		this.engine = new Engine();
 
 		this.engine.on(Events.PieceBytesDownloaded, function (method, bytes, peerId) {
-			console.log(method, bytes);
+			console.log("Download", method, bytes);
 		})
+
+		this.engine.on(Events.PieceBytesUploaded, function (method, bytes, peerId) {
+			console.log("Upload", method, bytes);
+		})
+
 
 		this.playerInstance = new Clappr.Player({
 			autoPlay: true,

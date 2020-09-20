@@ -46,13 +46,22 @@ body{
 }
 
 .chat-style{
-	width: 350px;
 	height: 750px;
 	margin: 0 auto;
 	text-align: left;
 	overflow-wrap: break-word;
 	overflow: scroll;
     word-wrap: break-word;
+}
+
+.chat-holder{	
+	width: 350px;
+	height: 750px;
+	margin: 0 auto;
+}
+
+.chat-send{	
+	float: right;
 }
 
 .nav-active{
