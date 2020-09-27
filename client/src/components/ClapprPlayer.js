@@ -56,7 +56,7 @@ class ClapprPlayer extends React.Component {
 	}
 
 	render() {
-		return <div ref={this.nodeRef} class='player-wrapper' />
+		return <div ref={this.nodeRef} className='player-wrapper' />
 	}
 }
 

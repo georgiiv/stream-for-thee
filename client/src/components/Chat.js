@@ -94,7 +94,7 @@ class Chat extends React.Component {
 					))}
 				</div>
 				<form onSubmit={this.handleSubmit} block>
-						<input className="form-control" type="text" value={this.state.message} placeholder="Message" onChange={this.handleInputChange} />
+					<input className="form-control" type="text" value={this.state.message} placeholder="Message" onChange={this.handleInputChange} />
 					{isLoggedIn
 						? [
 							<input className="chat-send btn btn-primary" type="submit" value="Send" />
