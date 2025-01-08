@@ -3,6 +3,7 @@ const passport = require("passport");
 const db = require("../models/");
 const Helpers = require("../helpers/helpers");
 
+// Return information about the current authenticated user
 router.get('/', Helpers.checkAuthenticated, async (req, res) => {
 	res.send({
 		id: req.user.id,
@@ -15,6 +16,7 @@ router.get('/', Helpers.checkAuthenticated, async (req, res) => {
 	});
 });
 
+// Create session and login
 router.post('/login', async (req, res) => {
 	passport.authenticate("local", function (err, user, info) {
 		if (err) { return next(err); }
@@ -31,6 +33,7 @@ router.post('/login', async (req, res) => {
 	})(req, res);
 });
 
+// User creation
 router.post('/register', async (req, res) => {
 	const { username, email, password, repeatPassword } = req.body;
 
@@ -49,7 +52,8 @@ router.post('/register', async (req, res) => {
 	}
 });
 
-router.post('/logout', async (req, res) => {
+// Destroy session and logout
+router.delete('/login', async (req, res) => {
 		req.logout();
 		res.status(200).send("Logged out.");
 });

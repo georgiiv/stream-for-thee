@@ -23,8 +23,8 @@ class Navigation extends React.Component {
 	}
 
 	async postLogout() {
-		const response = await fetch("/api/auth/logout", {
-			method: 'POST',
+		const response = await fetch("/api/auth/login", {
+			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json'
 			}
@@ -37,40 +37,6 @@ class Navigation extends React.Component {
 
 	render() {
 		const isLoggedIn = this.state.isLoggedIn;
-		// return (
-		// 	<nav>
-		// 		<h3>Logo</h3>
-		// 		<ul className="nav-links">
-
-		// 			<NavLink activeClassName="nav-active" className="nav-style" exact to='/'>
-		// 				<li>Home</li>
-		// 			</NavLink>
-		// 			<NavLink activeClassName="nav-active" className="nav-style" exact to='/Streams' >
-		// 				<li>Streams</li>
-		// 			</NavLink>
-
-		// 			{isLoggedIn
-		// 				? [
-		// 					<NavLink activeClassName="nav-active" className="nav-style" exact to='/Profile' >
-		// 						<li>Profile</li>
-		// 					</NavLink>,
-		// 					<NavLink activeClassName="nav-active" className="nav-style" onClick={this.postLogout} exact to='/Login' >
-		// 						<li>Logout</li>
-		// 					</NavLink>
-		// 				]
-		// 				: [
-		// 					<NavLink activeClassName="nav-active" className="nav-style" exact to='/Login' >
-		// 						<li>Login</li>
-		// 					</NavLink>,
-		// 					<NavLink activeClassName="nav-active" className="nav-style" exact to='/Register' >
-		// 						<li>Register</li>
-		// 					</NavLink>
-		// 				]
-		// 			}
-
-		// 		</ul>
-		// 	</nav>
-		// );
 
 		return (
 			<Navbar bg="dark" variant="dark">

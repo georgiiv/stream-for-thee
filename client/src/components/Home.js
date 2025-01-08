@@ -5,11 +5,9 @@ function Home(){
 	return(
 		<>
 			<br></br>
-			<br></br>
-			<br></br>
 			<h1 className="text-center text-uppercase font-weight-bold home-title">Stream For Thee</h1>
 			<br></br>
-			<h4 className="text-center home-title">Graduation project made by: Georgi Ivanov</h4>
+			<h4 className="text-center home-title">Made by: Georgi Ivanov</h4>
 		</>
 	);
 }

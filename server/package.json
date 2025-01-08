@@ -1,7 +1,7 @@
 {
   "name": "tu-diploma",
   "version": "0.0.0",
-  "description": "Diploma project for TU-Sofia",
+  "description": "Just a simple streaming service",
   "main": "app.js",
   "scripts": {
     "test": "jest",

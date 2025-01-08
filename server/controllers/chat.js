@@ -4,10 +4,7 @@ const db = require("../models/");
 const Chat = require("../services/chat");
 const Helpers = require("../helpers/helpers");
 
-router.get('/', async (req, res) => {
-	res.send(req.user);
-});
-
+// Used for sending messages to a stream chat
 router.post('/:username', Helpers.checkAuthenticated, async (req, res) => {
 	let message = req.body.message;
 

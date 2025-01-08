@@ -93,7 +93,7 @@ class Chat extends React.Component {
 						<p>{message.sender + ": " + message.content}</p>
 					))}
 				</div>
-				<form onSubmit={this.handleSubmit} block>
+				<form onSubmit={this.handleSubmit} className="form-inline" block>
 					<input className="form-control" type="text" value={this.state.message} placeholder="Message" onChange={this.handleInputChange} />
 					{isLoggedIn
 						? [
@@ -103,8 +103,6 @@ class Chat extends React.Component {
 							<input className="chat-send btn btn-secondary" type="submit" value="Send" disabled />
 						]
 					}
-
-					<h1>{}</h1>
 				</form>
 			</div>
 		);

@@ -12,8 +12,8 @@ class Login extends React.Component {
 	}
 
 	async postLogout() {
-		const response = await fetch("/api/auth/logout", {
-			method: 'POST',
+		const response = await fetch("/api/auth/login", {
+			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json'
 			}

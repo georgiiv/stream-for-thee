@@ -25,6 +25,7 @@ class Profile extends React.Component {
 	render() {
 		return (
 			<div>
+				<br></br>
 				<Row className="justify-content-md-center">
 					<Col xs lg="4">
 						<h1 className="text-center">{this.state.profileInfo.userName + "'s Profile"}</h1>

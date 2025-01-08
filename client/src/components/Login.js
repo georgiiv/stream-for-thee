@@ -6,7 +6,8 @@ class Login extends React.Component {
 		super(props);
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			warning: ''
 		};
 		this.handleUsernameChange = this.handleUsernameChange.bind(this);
 		this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -44,40 +45,35 @@ class Login extends React.Component {
 
 		if(response.status === 200){
 			window.location.href = '/Profile';
+		}else{
+			const warningMessage = await response.text();
+			this.setState({ warning: warningMessage });
 		}
 	}
 
 	render() {
-		// return (
-		// 	<Form onSubmit={this.handleSubmit}>
-		// 		<label>
-		// 			Name:
-		// 			<input type="text" value={this.state.username} onChange={this.handleUsernameChange} />
-		// 		</label>
-		// 		<label>
-		// 			Password:
-		// 			<input type="password" value={this.state.password} onChange={this.handlePasswordChange} />
-		// 		</label>
-		// 		<Button type="submit" variant="primary">Login</Button>
-		// 	</Form>
-		// );
-
 		return (
 			<Row className="justify-content-md-center">
 				<Col xs lg="3">
 					<Card>
-						<Card.Title className="text-center">Login</Card.Title>
+						<Card.Title className="text-center"><h1>Login</h1></Card.Title>
 						<Card.Body>
 							<Form onSubmit={this.handleSubmit}>
 								<Form.Group controlId="exampleForm.ControlInput1">
-									<Form.Control type="text" value={this.state.username} placeholder="Username" onChange={this.handleUsernameChange} />
+									<Form.Control type="text" value={this.state.username} placeholder="Username" onChange={this.handleUsernameChange} required/>
 								</Form.Group>
 
 								<Form.Group controlId="exampleForm.ControlInput1">
-									<Form.Control type="password" value={this.state.password} placeholder="Password" onChange={this.handlePasswordChange} />
+									<Form.Control type="password" value={this.state.password} placeholder="Password" onChange={this.handlePasswordChange} required/>
 								</Form.Group>
 								<Button type="submit" variant="primary" size="lg" block>Login</Button>
 							</Form>
+							<br></br>
+							{this.state.warning && (
+								<div className="alert alert-warning" role="alert">
+									{this.state.warning}
+								</div>
+							)}
 						</Card.Body>
 					</Card>
 				</Col>

@@ -34,7 +34,8 @@ class Stream extends React.Component {
 		if(this.state.streamUrl === ""){
 			return (
 				<div>
-					<h1>Offline</h1>
+					<br></br>
+					<center><h1>{this.props.match.params.username} offline chat.</h1></center>
 					<Chat streamer={this.props.match.params.username} />
 				</div>
 			)
@@ -42,6 +43,7 @@ class Stream extends React.Component {
 		
 		return (
 			<div className="container-fluid">
+				<br></br>
 				<Row>
 					<Col Col xs lg="9">						
 						<ClapprPlayer source={this.state.streamUrl} />			

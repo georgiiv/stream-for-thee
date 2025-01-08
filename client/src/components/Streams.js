@@ -21,7 +21,12 @@ class Streams extends React.Component {
 		return (
 			<div>
 				<br></br>
-				<h1 className="text-center">Streams</h1>
+				{this.state.streams.length === 0 && (
+					<h1 className="text-center">No active live streams</h1>
+				)}
+				{this.state.streams.length > 0 && (
+					<h1 className="text-center">Current live streams</h1>
+				)}
 				<div>
 					{this.state.streams.map(stream => (
 						<div className = "text-center">

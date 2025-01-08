@@ -3,7 +3,7 @@ const passport = require("passport");
 const db = require("../models/");
 const Encoder = require("../services/encoder")
 
-
+// Returns all current livestreams
 router.get('/', async (req, res) => {
 	console.log(Encoder.getStreams())
 	streams = await db.Stream.findAll({
@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
 	res.send(streams);
 });
 
+// Returns information about specific stream/video
 router.get('/id/:id', async (req, res) => {
 	stream = await db.Stream.findOne({
 		attributes: ['id', 'streamName', 'streamPath', 'playList', 'createdAt'],
@@ -25,10 +26,10 @@ router.get('/id/:id', async (req, res) => {
 			attributes: ['id', 'userName', 'profilePicture']
 		}]
 	})
-
 	res.send(stream);
 });
 
+// Returns information about current livestream of user
 router.get('/:username', async (req, res) => {
 	stream = await db.Stream.findOne({
 		attributes: ['id', 'streamName', 'streamPath', 'playList', 'createdAt'],
@@ -40,14 +41,12 @@ router.get('/:username', async (req, res) => {
 		}]
 	})
 	if(stream){
-		console.log("i am online \n\n\n\n\n\n\n\n")
 		res.send({
 			live: true,
 			stream: stream
 		});
 	}
 	else{
-		console.log("i am offline \n\n\n\n\n\n\n\n")
 		res.send({
 			live: false
 		});

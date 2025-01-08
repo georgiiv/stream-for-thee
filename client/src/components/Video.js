@@ -40,6 +40,7 @@ class Stream extends React.Component {
 		
 		return (
 			<div className="container-fluid">
+				<br></br>
 				<Row>
 					<Col Col xs lg="9">						
 						<ClapprPlayer source={this.state.streamUrl} />			

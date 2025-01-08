@@ -1,6 +1,6 @@
 module.exports = {
 	rtmp: {
-		port: 4646,
+		port: 5678,
 		chunk_size: 60000,
 		gop_cache: true,
 		ping: 30,
