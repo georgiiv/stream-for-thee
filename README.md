@@ -21,7 +21,7 @@ A simple live streaming service implementation, which also utilizes P2P sharing 
 - run `npm install`
 - If executing on `windows` run
 `$env:NODE_OPTIONS = "--openssl-legacy-provider"`
-- I*f executing on `linux` run
+- If executing on `linux` run
 `set NODE_OPTIONS=--openssl-legacy-provider`
 - Run `npm start`
 
