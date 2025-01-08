@@ -12,17 +12,18 @@ A simple live streaming service implementation, which also utilizes P2P sharing 
 - OBS Studio
 
 #### Server
-- go to `./server`
-- run `npm install`
-- run `node app.js`
+- Go to `./server`
+- Run `npm install`
+- Run `node app.js`
 
 #### Client
+- Go to `./client`
 - run `npm install`
-- if executing on `windows` run
+- If executing on `windows` run
 `$env:NODE_OPTIONS = "--openssl-legacy-provider"`
-- if executing on `linux` run
+- I*f executing on `linux` run
 `set NODE_OPTIONS=--openssl-legacy-provider`
-- run `npm start`
+- Run `npm start`
 
 ## How to use
 - Website will be accessible from `http://localhost:3000/`
