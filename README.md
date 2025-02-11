@@ -5,18 +5,17 @@ A simple live streaming service implementation, which also utilizes P2P sharing 
 
 ## How to run
 
-#### Requrements
+#### Requirements
 - Node.JS
 - PostgreSQL
 - FFMPEG available on the system path
-- OBS Studio
 
-#### Server
+#### Start REST and RTMP Server
 - Go to `./server`
 - Run `npm install`
 - Run `node app.js`
 
-#### Client
+#### Start REST Client
 - Go to `./client`
 - run `npm install`
 - If executing on `windows` run
@@ -29,7 +28,7 @@ A simple live streaming service implementation, which also utilizes P2P sharing 
 - Website will be accessible from `http://localhost:3000/`
 - Create an account from `http://localhost:3000/Register`
 - Login from `http://localhost:3000/Login`
-- OBS is needed to start a stream
+- OBS Studio is needed to start a stream
   - Inside OBS go to `Settings/Stream`
 	- Set Server to `http://localhost:5678`
 	- Set Stream Key to the one available from `http://localhost:3000/Profile`
